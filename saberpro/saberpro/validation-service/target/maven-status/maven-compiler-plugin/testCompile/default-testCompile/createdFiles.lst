@@ -1,0 +1,8 @@
+co/edu/unicauca/saberpro/validation/domain/QuestionValidatorTest.class
+co/edu/unicauca/saberpro/validation/domain/QuestionValidatorTest$StatementRules.class
+co/edu/unicauca/saberpro/validation/domain/QuestionValidatorTest$JustificationRules.class
+co/edu/unicauca/saberpro/validation/domain/QuestionValidatorTest$UniqueKeysRules.class
+co/edu/unicauca/saberpro/validation/domain/QuestionValidatorTest$OptionContentRules.class
+co/edu/unicauca/saberpro/validation/domain/QuestionValidatorTest$CorrectKeyRules.class
+co/edu/unicauca/saberpro/validation/domain/QuestionValidatorTest$OptionsCountRules.class
+co/edu/unicauca/saberpro/validation/web/ValidationControllerTest.class

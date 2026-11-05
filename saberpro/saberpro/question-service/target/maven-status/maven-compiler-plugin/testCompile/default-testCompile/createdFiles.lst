@@ -1,0 +1,10 @@
+co/edu/unicauca/saberpro/question/application/QuestionApplicationServiceTest$RecordingCommandPublisher.class
+co/edu/unicauca/saberpro/question/domain/model/QuestionTest.class
+co/edu/unicauca/saberpro/question/infrastructure/client/RestValidationClientTest.class
+co/edu/unicauca/saberpro/question/infrastructure/mapper/QuestionDomainMapperTest.class
+co/edu/unicauca/saberpro/question/application/QuestionApplicationServiceTest$InMemoryQuestionRepository.class
+co/edu/unicauca/saberpro/question/web/QuestionControllerTest.class
+co/edu/unicauca/saberpro/question/web/QuestionControllerTest$FakeQuestionApplicationService.class
+co/edu/unicauca/saberpro/question/application/QuestionApplicationServiceTest$StubValidationPort.class
+co/edu/unicauca/saberpro/question/infrastructure/client/RestValidationClientTest$1.class
+co/edu/unicauca/saberpro/question/application/QuestionApplicationServiceTest.class

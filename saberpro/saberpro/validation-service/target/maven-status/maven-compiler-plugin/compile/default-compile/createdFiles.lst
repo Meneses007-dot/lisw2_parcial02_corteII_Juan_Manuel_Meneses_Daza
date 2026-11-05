@@ -1,0 +1,6 @@
+co/edu/unicauca/saberpro/validation/ValidationServiceApplication.class
+co/edu/unicauca/saberpro/validation/web/ValidationController.class
+co/edu/unicauca/saberpro/validation/web/OptionDto.class
+co/edu/unicauca/saberpro/validation/domain/QuestionValidator.class
+co/edu/unicauca/saberpro/validation/web/ValidationRequest.class
+co/edu/unicauca/saberpro/validation/web/ValidationResponse.class

@@ -1,0 +1,6 @@
+/home/ctos/Documentos/SEXTO SEMESTRE/LAB. SOFTWARE II/parcial 2/saberpro/saberpro/validation-service/src/main/java/co/edu/unicauca/saberpro/validation/ValidationServiceApplication.java
+/home/ctos/Documentos/SEXTO SEMESTRE/LAB. SOFTWARE II/parcial 2/saberpro/saberpro/validation-service/src/main/java/co/edu/unicauca/saberpro/validation/domain/QuestionValidator.java
+/home/ctos/Documentos/SEXTO SEMESTRE/LAB. SOFTWARE II/parcial 2/saberpro/saberpro/validation-service/src/main/java/co/edu/unicauca/saberpro/validation/web/OptionDto.java
+/home/ctos/Documentos/SEXTO SEMESTRE/LAB. SOFTWARE II/parcial 2/saberpro/saberpro/validation-service/src/main/java/co/edu/unicauca/saberpro/validation/web/ValidationController.java
+/home/ctos/Documentos/SEXTO SEMESTRE/LAB. SOFTWARE II/parcial 2/saberpro/saberpro/validation-service/src/main/java/co/edu/unicauca/saberpro/validation/web/ValidationRequest.java
+/home/ctos/Documentos/SEXTO SEMESTRE/LAB. SOFTWARE II/parcial 2/saberpro/saberpro/validation-service/src/main/java/co/edu/unicauca/saberpro/validation/web/ValidationResponse.java

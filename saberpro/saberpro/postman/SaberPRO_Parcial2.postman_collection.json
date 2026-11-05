@@ -1,0 +1,202 @@
+{
+  "info": {
+    "name": "Saber PRO - Parcial 2 Corte II",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Crear pregunta válida (201 Created)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{questionUrl}}/questions"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"statement\": \"¿Cuál es la capital de Colombia?\",\n  \"options\": [\n    {\n      \"key\": \"A\",\n      \"text\": \"Bogotá\"\n    },\n    {\n      \"key\": \"B\",\n      \"text\": \"Medellín\"\n    },\n    {\n      \"key\": \"C\",\n      \"text\": \"Cali\"\n    },\n    {\n      \"key\": \"D\",\n      \"text\": \"Popayán\"\n    }\n  ],\n  \"correctKey\": \"A\",\n  \"justification\": \"Bogotá es la capital de Colombia y sede de los poderes públicos.\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 201 Created', () => pm.response.to.have.status(201));",
+              "const b = pm.response.json();",
+              "pm.test('Estado DRAFT', () => pm.expect(b.status).to.eql('DRAFT'));",
+              "pm.test('Tiene id y 4 opciones', () => { pm.expect(b.id).to.exist; pm.expect(b.options.length).to.eql(4); });",
+              "pm.collectionVariables.set('questionId', b.id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Crear pregunta inválida (400 Bad Request)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{questionUrl}}/questions"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"statement\": \"Pregunta con solo tres opciones\",\n  \"options\": [\n    {\n      \"key\": \"A\",\n      \"text\": \"Uno\"\n    },\n    {\n      \"key\": \"B\",\n      \"text\": \"Dos\"\n    },\n    {\n      \"key\": \"C\",\n      \"text\": \"Tres\"\n    }\n  ],\n  \"correctKey\": \"Z\",\n  \"justification\": \"corta\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 400 Bad Request', () => pm.response.to.have.status(400));",
+              "const b = pm.response.json();",
+              "pm.test('Devuelve lista de errores', () => { pm.expect(b.errors).to.be.an('array'); pm.expect(b.errors.length).to.be.above(0); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Enviar a revisión (202 Accepted)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{questionUrl}}/questions/{{questionId}}/submit"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 202 Accepted', () => pm.response.to.have.status(202));",
+              "const b = pm.response.json();",
+              "pm.test('operationId presente', () => pm.expect(b.operationId).to.be.a('string').and.not.empty);",
+              "pm.test('Estado PROCESSING', () => pm.expect(b.status).to.eql('PROCESSING'));",
+              "pm.collectionVariables.set('operationId', b.operationId);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "4a. Consola RabbitMQ - cola question.submit.review.queue (API de gestión)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:15672/api/queues/%2F/question.submit.review.queue"
+        },
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "guest"
+            },
+            {
+              "key": "password",
+              "value": "guest"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Cola existe (200)', () => pm.response.to.have.status(200));",
+              "const b = pm.response.json();",
+              "pm.test('Cola con consumidor del Lifecycle Service', () => pm.expect(b.consumers).to.be.at.least(1));",
+              "const pub = (b.message_stats && b.message_stats.publish) || 0;",
+              "pm.test('Al menos 1 mensaje publicado', () => pm.expect(pub).to.be.at.least(1));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "4b. Lifecycle Service - estado PENDING_REVIEW",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{lifecycleUrl}}/lifecycle/{{questionId}}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 200', () => pm.response.to.have.status(200));",
+              "pm.test('Estado PENDING_REVIEW', () => pm.expect(pm.response.json().state).to.eql('PENDING_REVIEW'));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "4c. Question Service - estado sincronizado",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{questionUrl}}/questions/{{questionId}}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Estado PENDING_REVIEW', () => pm.expect(pm.response.json().status).to.eql('PENDING_REVIEW'));"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "questionUrl",
+      "value": "http://localhost:8083"
+    },
+    {
+      "key": "lifecycleUrl",
+      "value": "http://localhost:8084"
+    },
+    {
+      "key": "validationUrl",
+      "value": "http://localhost:8082"
+    },
+    {
+      "key": "questionId",
+      "value": ""
+    },
+    {
+      "key": "operationId",
+      "value": ""
+    }
+  ]
+}

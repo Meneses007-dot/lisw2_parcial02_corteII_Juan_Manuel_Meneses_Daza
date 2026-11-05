@@ -1,0 +1,5 @@
+co/edu/unicauca/saberpro/lifecycle/application/LifecycleServiceTest.class
+co/edu/unicauca/saberpro/lifecycle/web/LifecycleControllerTest$FakeLifecycleService.class
+co/edu/unicauca/saberpro/lifecycle/messaging/QuestionSubmitListenerTest$RecordingLifecycleService.class
+co/edu/unicauca/saberpro/lifecycle/messaging/QuestionSubmitListenerTest.class
+co/edu/unicauca/saberpro/lifecycle/web/LifecycleControllerTest.class

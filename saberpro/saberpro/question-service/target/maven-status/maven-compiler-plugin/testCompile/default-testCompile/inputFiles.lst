@@ -1,0 +1,5 @@
+/home/ctos/Documentos/SEXTO SEMESTRE/LAB. SOFTWARE II/parcial 2/saberpro/saberpro/question-service/src/test/java/co/edu/unicauca/saberpro/question/application/QuestionApplicationServiceTest.java
+/home/ctos/Documentos/SEXTO SEMESTRE/LAB. SOFTWARE II/parcial 2/saberpro/saberpro/question-service/src/test/java/co/edu/unicauca/saberpro/question/domain/model/QuestionTest.java
+/home/ctos/Documentos/SEXTO SEMESTRE/LAB. SOFTWARE II/parcial 2/saberpro/saberpro/question-service/src/test/java/co/edu/unicauca/saberpro/question/infrastructure/client/RestValidationClientTest.java
+/home/ctos/Documentos/SEXTO SEMESTRE/LAB. SOFTWARE II/parcial 2/saberpro/saberpro/question-service/src/test/java/co/edu/unicauca/saberpro/question/infrastructure/mapper/QuestionDomainMapperTest.java
+/home/ctos/Documentos/SEXTO SEMESTRE/LAB. SOFTWARE II/parcial 2/saberpro/saberpro/question-service/src/test/java/co/edu/unicauca/saberpro/question/web/QuestionControllerTest.java

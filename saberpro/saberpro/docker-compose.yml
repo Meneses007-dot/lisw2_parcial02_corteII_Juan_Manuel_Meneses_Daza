@@ -1,0 +1,10 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: saberpro-rabbitmq
+    ports:
+      - "5672:5672"     # AMQP
+      - "15672:15672"   # Consola de gestión
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
